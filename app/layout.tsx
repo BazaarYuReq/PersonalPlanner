@@ -3,7 +3,11 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import SwitchTheme from "@/components/switch-theme";
-
+import Sidebar from "@/components/ui/sidebar";
+import { NotesProvider } from "../context/NotesContext"
+import { TasksProvider } from "../context/TasksContext"
+import { ThemeProviders } from "../context/ThemeContext"
+ 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -28,7 +32,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      ><ThemeProviders><TasksProvider><NotesProvider>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -36,10 +40,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <header>
-            <SwitchTheme />
+            
           </header>
-          <main className="bg-background">{children}</main>
-        </ThemeProvider>
+          <div className="flex w-[100vw] h-[100vh]"><Sidebar/><main className="bg-background">{children}</main></div>
+        </ThemeProvider></NotesProvider></TasksProvider></ThemeProviders>
       </body>
     </html>
   );
