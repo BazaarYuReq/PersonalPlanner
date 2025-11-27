@@ -7,31 +7,43 @@ export function TasksProvider({ children }) {
   const LS_KEY = "planner_tasks_v1";
   const [tasks, setTasks] = useState([]);
 
+  // Load from localStorage
   useEffect(() => {
     const saved = localStorage.getItem(LS_KEY);
     if (saved) setTasks(JSON.parse(saved));
   }, []);
 
+  // Save to localStorage whenever tasks change
   useEffect(() => {
     localStorage.setItem(LS_KEY, JSON.stringify(tasks));
   }, [tasks]);
 
-  const addTask = (title) => {
-    setTasks((prev) => [...prev, { id: Date.now(), title, completed: false }]);
-  };
+  // Add a new task (default to "todo")
+  function addTask(title) {
+    const newTask = {
+      id: Date.now(),
+      title,
+      status: "todo", // "todo" | "progress" | "done"
+    };
+    setTasks((prev) => [...prev, newTask]);
+  }
 
-  const toggleTask = (id) => {
+  // Move a task between columns (drag/drop)
+  function moveTask(id, newStatus) {
     setTasks((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
+      prev.map((t) => (t.id === id ? { ...t, status: newStatus } : t))
     );
-  };
+  }
 
-  const deleteTask = (id) => {
+  // Delete a task
+  function deleteTask(id) {
     setTasks((prev) => prev.filter((t) => t.id !== id));
-  };
+  }
 
   return (
-    <TasksContext.Provider value={{ tasks, addTask, toggleTask, deleteTask }}>
+    <TasksContext.Provider
+      value={{ tasks, setTasks, addTask, moveTask, deleteTask }}
+    >
       {children}
     </TasksContext.Provider>
   );
