@@ -8,8 +8,11 @@ export default function Sidebar() {
       <h1 className="text-2xl font-bold mb-6 dark:text-white">Planner</h1>
 
       <nav className="space-y-3 text-lg">
+        <Link href="/profile " className="block dark:text-white">
+          Profile
+        </Link>
         <Link href="/" className="block dark:text-white">
-        Home
+          Home
         </Link>
         <Link href="/dashboard" className="block dark:text-white">
           Dashboard
