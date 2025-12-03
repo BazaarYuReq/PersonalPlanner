@@ -26,7 +26,7 @@ export default function DashboardPage() {
   return (
     <div className="dark:text-white flex flex-col items-center justify-center w-[100vw] p-6">
       <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
-<ProgressBar/>
+            <ProgressBar/>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl">
         {/* To Do */}
         <div className="p-6 border dark:border-gray-700 rounded-lg">

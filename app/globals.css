@@ -120,3 +120,75 @@
     @apply bg-background text-foreground;
   }
 }
+/* 3D KEYBOARD BASE STYLES */
+@layer components {
+  .key-3d {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+
+  .key-shadow {
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    background: hsl(0 0% 0% / 0.25);
+    transform: translateY(2px);
+    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+  }
+
+  .key-edge {
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    background: linear-gradient(
+      to left,
+      hsl(340deg 100% 16%) 0%,
+      hsl(340deg 100% 32%) 8%,
+      hsl(340deg 100% 32%) 92%,
+      hsl(340deg 100% 16%) 100%
+    );
+  }
+
+  .key-front {
+    position: relative;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 18px;
+    color: white;
+    background: hsl(345deg 100% 47%);
+    transform: translateY(-4px);
+    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+  }
+}
+
+/* 3D INTERACTION ANIMATIONS */
+@layer utilities {
+  .key-3d:hover { filter: brightness(110%); }
+
+  .key-3d:hover .key-front {
+    transform: translateY(-6px);
+    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+  }
+
+  .key-3d:active .key-front {
+    transform: translateY(-2px);
+    transition: transform 34ms;
+  }
+
+  .key-3d:hover .key-shadow {
+    transform: translateY(4px);
+    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+  }
+
+  .key-3d:active .key-shadow {
+    transform: translateY(1px);
+    transition: transform 34ms;
+  }
+}

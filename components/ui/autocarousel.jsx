@@ -2,8 +2,9 @@
 
 import { motion } from "framer-motion";
 
-export default function AutoCarousel() {
+export default function FixedScreenCarousel() {
   const features = [
+    { title: "👀 Profile", text: "Create & grow your profile." },
     { title: "📊 Dashboard", text: "Your progress at a glance." },
     { title: "📝 Tasks", text: "Create and track tasks." },
     { title: "📚 Notes", text: "Organize your notes cleanly." },
@@ -14,9 +15,7 @@ export default function AutoCarousel() {
 
   function Marquee({ speed, reverse, reverseOrder }) {
     const base = reverseOrder ? [...features].reverse() : features;
-
-    // duplicate so animation has no gaps
-    const items = [...base, ...base];
+    const items = [...base, ...base]; // duplicated for no-gap scrolling
 
     return (
       <motion.div
@@ -42,11 +41,21 @@ export default function AutoCarousel() {
   }
 
   return (
-    <div className="w-full overflow-hidden py-12 bg-black">
-      {/* Row 1 — normal order */}
+    <div
+      className="
+        fixed top-1/2 left-1/2 
+        -translate-x-1/2 -translate-y-1/2
+        w-[90vw] max-w-[900px] 
+        h-[480px]
+        bg-black/80 backdrop-blur-xl
+        border border-gray-800 rounded-3xl 
+        shadow-[0_0_40px_rgba(0,0,0,0.6)]
+        overflow-hidden
+        flex flex-col justify-center
+        z-50
+      "
+    >
       <Marquee speed={18} reverse={false} reverseOrder={false} />
-
-      {/* Row 2 — reversed order */}
       <Marquee speed={22} reverse={true} reverseOrder={true} />
     </div>
   );
