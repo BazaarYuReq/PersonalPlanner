@@ -4,10 +4,10 @@ import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import SwitchTheme from "@/components/switch-theme";
 import Sidebar from "@/components/ui/sidebar";
-import { NotesProvider } from "../context/NotesContext"
-import { TasksProvider } from "../context/TasksContext"
-import { ThemeProviders } from "../context/ThemeContext"
- 
+import { NotesProvider } from "../context/NotesContext";
+import { TasksProvider } from "../context/TasksContext";
+import { ThemeProviders } from "../context/ThemeContext";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -42,7 +42,7 @@ export default function RootLayout({ children }) {
 
                 {/* FIXED WRAPPER */}
                 <div className="flex w-full min-h-screen">
-                  <Sidebar />
+                  {/* <Sidebar /> */}
 
                   {/* MAIN FIXES EVERYTHING */}
                   <main className="bg-background min-w-0 flex-1 overflow-visible">
