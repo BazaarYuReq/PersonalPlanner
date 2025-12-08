@@ -1,8 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
-export default function FixedScreenCarousel({ setActiveApp }) {
+export default function FixedScreenCarousel() {
+  const router = useRouter();
+
   const features = [
     {
       title: "👀 Profile",
@@ -46,7 +49,7 @@ export default function FixedScreenCarousel({ setActiveApp }) {
         {items.map((f, i) => (
           <button
             key={i}
-            onClick={() => setActiveApp(f.app)}
+            onClick={() => router.push(`/${f.app}`)}
             className="w-[240px] md:w-[260px] bg-[#111827] border border-gray-800 
                      rounded-2xl p-5 shadow-lg hover:shadow-xl hover:scale-105 
                      transition-all duration-200 cursor-pointer text-left"
@@ -63,9 +66,9 @@ export default function FixedScreenCarousel({ setActiveApp }) {
     <div
       className="
         fixed top-1/2 left-1/2 
-        -translate-x-[450px] -translate-y-[590px]
-        w-[90vw] max-w-[950px] 
-        h-[534px]
+        -translate-x-[720px] -translate-y-[400px]
+        w-[90vw] max-w-[1440px] 
+        h-[800px]
         bg-black/80 backdrop-blur-xl
         border-[15px] border-gray-800 rounded-3xl 
         shadow-[0_0_40px_rgba(0,0,0,0.6)]
