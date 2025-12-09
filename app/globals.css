@@ -192,3 +192,18 @@
     transition: transform 34ms;
   }
 }
+@keyframes moveClouds {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1000px 0; /* adjust speed/distance */
+  }
+}
+
+.clouds {
+  background-image: url('/clouds.png');
+  background-repeat: repeat-x;
+  background-size: cover;
+  animation: moveClouds 60s linear infinite;
+}

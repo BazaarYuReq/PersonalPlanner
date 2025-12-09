@@ -1,34 +1,50 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import { useNotes } from "../../context/NotesContext";
+import { Loader2 } from "lucide-react";
 
 export default function NotesPage() {
-  const [text, setText] = useState("");
   const { notes, setNotes } = useNotes();
-  useEffect(() => {
-    const saved = localStorage.getItem("notes");
-    if (saved) setText(saved);
-  }, []);
+  const [saving, setSaving] = useState(false);
 
-  // Auto-save
+  // Auto-save logic
   useEffect(() => {
+    setSaving(true);
     const timeout = setTimeout(() => {
-      localStorage.setItem("notes", text);
-    }, 500);
+      localStorage.setItem("notes", notes);
+      setSaving(false);
+    }, 400);
 
     return () => clearTimeout(timeout);
-  }, [text]);
+  }, [notes]);
 
   return (
-    <div className="dark:text-white">
-      <h1 className="text-3xl font-bold mb-4">Notes</h1>
+    <div className="w-full px-4 md:px-8 pt-6 dark:text-white">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-4 sticky top-0 bg-white dark:bg-gray-900 py-3 z-10">
+        <h1 className="text-3xl font-bold">Notes</h1>
 
-      <textarea
-        className="w-full h-[500px] border p-4 rounded dark:bg-gray-800 dark:text-white"
-        value={notes}
-        onChange={(e) => setNotes(e.target.value)}
-        placeholder="Write your notes..."
-      />
+        {/* Saving indicator */}
+        {saving ? (
+          <div className="flex items-center gap-2 text-gray-500 dark:text-gray-300">
+            <Loader2 className="animate-spin h-4 w-4" />
+            <span className="text-sm">Saving…</span>
+          </div>
+        ) : (
+          <span className="text-sm text-green-500">Saved</span>
+        )}
+      </div>
+
+      {/* Notes Container */}
+      <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl shadow p-4 md:p-6 transition">
+        <textarea
+          className="w-full h-[550px] bg-transparent resize-none focus:outline-none text-lg leading-relaxed"
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          placeholder="Write your notes..."
+        />
+      </div>
     </div>
   );
 }

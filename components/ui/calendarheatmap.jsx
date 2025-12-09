@@ -2,60 +2,41 @@
 
 import React, { useMemo, useState } from "react";
 
-// CalendarHeatmap.jsx
-// Front-end-only, Tailwind-friendly implementation of GitHub-like "green boxes".
-// Props:
-// - data: Array<{ date: 'YYYY-MM-DD', count: number }>
-// - startDate (optional): 'YYYY-MM-DD' start of calendar (default: 52 weeks back)
-// - weeks (optional): number of weeks to show (default: 53)
-// - onClick(day) optional callback when a square is clicked
-
 export default function CalendarHeatmap({
   data = [],
   startDate = null,
   weeks = 53,
   onClick,
 }) {
-  // Utility: parse YYYY-MM-DD into Date (keeps timezone safe by building UTC)
-  function parseDate(iso) {
+  const [tooltip, setTooltip] = useState(null);
+
+  const parseDate = (iso) => {
     const [y, m, d] = iso.split("-").map(Number);
     return new Date(Date.UTC(y, m - 1, d));
-  }
+  };
 
-  function formatDate(d) {
-    return d.toISOString().slice(0, 10);
-  }
+  const formatDate = (d) => d.toISOString().slice(0, 10);
 
-  // Build map for fast lookup: dateStr -> count
+  // Build map for fast lookup
   const dataMap = useMemo(() => {
     const m = new Map();
     for (const item of data) m.set(item.date, item.count || 0);
     return m;
   }, [data]);
 
-  // Compute start date (beginning of week) — default to 52 weeks ago, aligned to Sunday
+  // Start date aligned to Sunday
   const computedStart = useMemo(() => {
     const today = new Date();
-    const defaultStart = new Date(
-      Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate())
-    );
-    defaultStart.setUTCDate(defaultStart.getUTCDate() - (weeks * 7 - 1));
-
-const sample = [
-  { date: "2025-11-28", count: 3 },
-  { date: "2025-11-27", count: 1 },
-  // ...
-];
-
-    const base = startDate ? parseDate(startDate) : defaultStart;
-    // align to Sunday
-    const day = base.getUTCDay();
-    base.setUTCDate(base.getUTCDate() - day);
-    base.setUTCHours(0, 0, 0, 0);
-    return base;
+    const defaultStart = startDate ? parseDate(startDate) : new Date(today);
+    if (!startDate)
+      defaultStart.setUTCDate(defaultStart.getUTCDate() - weeks * 7 + 1);
+    const day = defaultStart.getUTCDay();
+    defaultStart.setUTCDate(defaultStart.getUTCDate() - day);
+    defaultStart.setUTCHours(0, 0, 0, 0);
+    return defaultStart;
   }, [startDate, weeks]);
 
-  // Generate grid days array: weeks columns x 7 rows
+  // Generate grid
   const grid = useMemo(() => {
     const cols = [];
     for (let w = 0; w < weeks; w++) {
@@ -70,16 +51,43 @@ const sample = [
     return cols;
   }, [computedStart, weeks]);
 
-  // Compute color level for a count (0..4). You can tweak thresholds.
-  function colorLevel(count) {
-    if (!count || count <= 0) return 0;
-    if (count === 1) return 1;
-    if (count <= 3) return 2;
-    if (count <= 6) return 3;
-    return 4;
-  }
+  // Generate month labels
+  const months = useMemo(() => {
+    const labels = [];
+    let lastMonth = -1;
+    grid.forEach((col, idx) => {
+      const month = col[0].getUTCMonth();
+      const year = col[0].getUTCFullYear();
+      if (month !== lastMonth) {
+        labels.push({
+          idx,
+          name: `${col[0].toLocaleString("default", {
+            month: "short",
+          })} ${year}`,
+        });
+        lastMonth = month;
+      }
+    });
+    return labels;
+  }, [grid]);
 
-  // Tailwind-compatible color classes (4 shades + empty)
+  // Compute color level dynamically
+  const maxCount = Math.max(...data.map((d) => d.count || 0), 0);
+  const colorLevel = (count) => {
+    if (!count || count <= 0) return 0;
+    const thresholds = [
+      0,
+      1,
+      Math.ceil(maxCount / 3),
+      Math.ceil((2 * maxCount) / 3),
+      maxCount,
+    ];
+    if (count <= thresholds[1]) return 1;
+    if (count <= thresholds[2]) return 2;
+    if (count <= thresholds[3]) return 3;
+    return 4;
+  };
+
   const palette = [
     "bg-transparent border border-gray-800",
     "bg-green-100",
@@ -88,25 +96,32 @@ const sample = [
     "bg-green-700",
   ];
 
-  // Tooltip state (simple, accessible)
-  const [tooltip, setTooltip] = useState(null);
-
   return (
     <div className="w-full">
-      <div className="flex items-start gap-2">
-        {/* Weekday labels (Mon/Wed/Fri) on the left for small screens */}
+      {/* Month labels */}
+      <div className="flex gap-1 ml-6 text-xs text-gray-400 overflow-x-auto">
+        {grid.map((_, idx) => {
+          const monthLabel = months.find((m) => m.idx === idx);
+          return monthLabel ? (
+            <span key={monthLabel.idx} className="absolute text-xs">
+              {monthLabel.name}
+            </span>
+          ) : null;
+        })}
+      </div>
+
+      <div className="flex items-start gap-2 mt-4">
+        {/* Weekday labels */}
         <div className="hidden md:flex flex-col text-xs text-gray-400 mr-2 h-full justify-between py-1">
-          <span className="h-3">Sun</span>
-          <span className="h-3">Mon</span>
-          <span className="h-3">Tue</span>
-          <span className="h-3">Wed</span>
-          <span className="h-3">Thu</span>
-          <span className="h-3">Fri</span>
-          <span className="h-3">Sat</span>
+          {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+            <span key={day} className="h-3">
+              {day}
+            </span>
+          ))}
         </div>
 
-        {/* Grid (weeks are columns) */}
-        <div className="overflow-x-auto">
+        {/* Grid */}
+        <div className="overflow-x-auto relative">
           <div className="flex gap-1">
             {grid.map((col, colIdx) => (
               <div key={colIdx} className="flex flex-col gap-1">
@@ -115,8 +130,6 @@ const sample = [
                   const count = dataMap.get(dateStr) || 0;
                   const lvl = colorLevel(count);
                   const cls = palette[lvl];
-
-                  // Hide future dates (optional)
                   const isFuture = day.getTime() > new Date().getTime();
 
                   return (
@@ -134,12 +147,12 @@ const sample = [
                       onClick={() =>
                         onClick && onClick({ date: dateStr, count })
                       }
-                      aria-label={`${dateStr}: ${count} contributions`}
+                      aria-label={`${dateStr}: ${count} tasks`}
                       disabled={isFuture}
                       className={`w-3 h-3 md:w-4 md:h-4 rounded-sm transition-all duration-150 ${cls} ${
                         isFuture
                           ? "opacity-30 cursor-not-allowed"
-                          : "cursor-pointer"
+                          : "cursor-pointer hover:scale-110"
                       }`}
                       title={`${dateStr}: ${count} task(s)`}
                     />
@@ -151,11 +164,16 @@ const sample = [
         </div>
       </div>
 
-      {/* Tooltip (absolutely positioned) */}
+      {/* Tooltip */}
       {tooltip && (
         <div
           className="fixed pointer-events-none z-50 text-xs bg-gray-900 text-white px-3 py-1 rounded shadow"
-          style={{ left: tooltip.x + 12, top: tooltip.y + 12 }}
+          style={{
+            left: tooltip.x + 12,
+            top: tooltip.y + 12,
+            maxWidth: "200px",
+            wordWrap: "break-word",
+          }}
         >
           <div className="font-semibold">{tooltip.count} worked</div>
           <div className="text-gray-300">{tooltip.date}</div>
