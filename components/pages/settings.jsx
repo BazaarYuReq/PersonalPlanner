@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import CalendarHeatmap from "@/components/ui/calendarheatmap";
+import ReturnButton from "@/components/ui/returnbutton";
 
 const moods = ["💖", "😊", "😐", "😞", "😭"];
 
@@ -81,7 +82,7 @@ export default function ProfileSettingsPage() {
 
   return (
     <main className="max-w-4xl mx-auto p-6 space-y-10 text-gray-900 dark:text-white h-screen overflow-y-scroll">
-      {/* HEADER */}
+      {/* HEADER */}      <ReturnButton />
       <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-pink-400 to-purple-400 text-transparent bg-clip-text">
         Profile & Settings
       </h1>

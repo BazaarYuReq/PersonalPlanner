@@ -76,6 +76,7 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --background-gradient: linear-gradient(135deg, #7c3aed, #facc15);
 }
 
 .dark {
@@ -110,6 +111,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --background-gradient: linear-gradient(135deg, #facc15, #7c3aed);
 }
 
 @layer base {
@@ -117,7 +119,9 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    background: var(--background-gradient) !important;
+    background-attachment: fixed;
+    background-size: cover;
   }
 }
 /* 3D KEYBOARD BASE STYLES */
@@ -140,7 +144,7 @@
     border-radius: 10px;
     background: hsl(0 0% 0% / 0.25);
     transform: translateY(2px);
-    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+    transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
   }
 
   .key-edge {
@@ -164,17 +168,19 @@
     color: white;
     background: hsl(345deg 100% 47%);
     transform: translateY(-4px);
-    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+    transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
   }
 }
 
 /* 3D INTERACTION ANIMATIONS */
 @layer utilities {
-  .key-3d:hover { filter: brightness(110%); }
+  .key-3d:hover {
+    filter: brightness(110%);
+  }
 
   .key-3d:hover .key-front {
     transform: translateY(-6px);
-    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+    transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
   }
 
   .key-3d:active .key-front {
@@ -184,7 +190,7 @@
 
   .key-3d:hover .key-shadow {
     transform: translateY(4px);
-    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+    transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
   }
 
   .key-3d:active .key-shadow {
@@ -202,7 +208,7 @@
 }
 
 .clouds {
-  background-image: url('/clouds.png');
+  background-image: url("/clouds.png");
   background-repeat: repeat-x;
   background-size: cover;
   animation: moveClouds 60s linear infinite;

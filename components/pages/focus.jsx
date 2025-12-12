@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import ReturnButton from "@/components/ui/returnbutton";
 
 export default function FocusPage() {
   // Timer System
@@ -99,93 +101,94 @@ export default function FocusPage() {
   const percent = (seconds / times[mode]) * 100;
 
   return (
-    <div className="dark:text-white text-center px-6 py-10">
-      <h1 className="text-4xl font-bold mb-8">⏱️ Focus Mode</h1>
+    <main>
+      {" "}
+      <ReturnButton />
+      <div className="dark:text-white text-center px-6 py-10">
+        {" "}
+        <h1 className="text-4xl font-bold mb-8">⏱️ Focus Mode</h1>
+        {/* XP / Coins / Streak */}
+        <div className="flex justify-center gap-6 mb-10">
+          <div className="p-4 bg-white/5 backdrop-blur-md rounded-xl border border-white/10">
+            <p className="text-lg font-semibold">⭐ XP</p>
+            <p className="text-2xl font-bold">{xp}</p>
+          </div>
 
-      {/* XP / Coins / Streak */}
-      <div className="flex justify-center gap-6 mb-10">
-        <div className="p-4 bg-white/5 backdrop-blur-md rounded-xl border border-white/10">
-          <p className="text-lg font-semibold">⭐ XP</p>
-          <p className="text-2xl font-bold">{xp}</p>
+          <div className="p-4 bg-white/5 backdrop-blur-md rounded-xl border border-white/10">
+            <p className="text-lg font-semibold">💰 Coins</p>
+            <p className="text-2xl font-bold">{coins}</p>
+          </div>
+
+          <div className="p-4 bg-white/5 backdrop-blur-md rounded-xl border border-white/10">
+            <p className="text-lg font-semibold">🔥 Streak</p>
+            <p className="text-2xl font-bold">{streak} days</p>
+          </div>
         </div>
-
-        <div className="p-4 bg-white/5 backdrop-blur-md rounded-xl border border-white/10">
-          <p className="text-lg font-semibold">💰 Coins</p>
-          <p className="text-2xl font-bold">{coins}</p>
+        {/* Mode Switcher */}
+        <div className="flex justify-center gap-4 mb-8">
+          {["focus", "short", "long"].map((m) => (
+            <button
+              key={m}
+              onClick={() => switchMode(m)}
+              className={`px-5 py-2 rounded-xl transition-all ${
+                mode === m
+                  ? "bg-blue-600 text-white shadow-lg scale-105"
+                  : "bg-gray-200 dark:bg-gray-800 dark:text-white hover:bg-gray-300"
+              }`}
+            >
+              {m === "focus"
+                ? "Focus"
+                : m === "short"
+                ? "Short Break"
+                : "Long Break"}
+            </button>
+          ))}
         </div>
+        {/* Circular Timer */}
+        <div className="relative w-60 h-60 mx-auto mb-8">
+          <svg className="w-full h-full -rotate-90">
+            <circle
+              cx="120"
+              cy="120"
+              r="100"
+              stroke="#333"
+              strokeWidth="15"
+              fill="none"
+            />
+            <circle
+              cx="120"
+              cy="120"
+              r="100"
+              stroke="#3b82f6"
+              strokeWidth="15"
+              fill="none"
+              strokeDasharray="628"
+              strokeDashoffset={(628 * (100 - percent)) / 100}
+              className="transition-all duration-500"
+            />
+          </svg>
 
-        <div className="p-4 bg-white/5 backdrop-blur-md rounded-xl border border-white/10">
-          <p className="text-lg font-semibold">🔥 Streak</p>
-          <p className="text-2xl font-bold">{streak} days</p>
+          <div className="absolute inset-0 flex items-center justify-center text-5xl font-bold">
+            {format(seconds)}
+          </div>
         </div>
-      </div>
-
-      {/* Mode Switcher */}
-      <div className="flex justify-center gap-4 mb-8">
-        {["focus", "short", "long"].map((m) => (
+        {/* Controls */}
+        <div className="flex justify-center gap-4">
           <button
-            key={m}
-            onClick={() => switchMode(m)}
-            className={`px-5 py-2 rounded-xl transition-all ${
-              mode === m
-                ? "bg-blue-600 text-white shadow-lg scale-105"
-                : "bg-gray-200 dark:bg-gray-800 dark:text-white hover:bg-gray-300"
-            }`}
+            onClick={() => setRunning((r) => !r)}
+            className="px-8 py-3 bg-green-500 text-white rounded-xl shadow-lg hover:scale-105 transition"
           >
-            {m === "focus"
-              ? "Focus"
-              : m === "short"
-              ? "Short Break"
-              : "Long Break"}
+            {running ? "Pause" : "Start"}
           </button>
-        ))}
-      </div>
 
-      {/* Circular Timer */}
-      <div className="relative w-60 h-60 mx-auto mb-8">
-        <svg className="w-full h-full -rotate-90">
-          <circle
-            cx="120"
-            cy="120"
-            r="100"
-            stroke="#333"
-            strokeWidth="15"
-            fill="none"
-          />
-          <circle
-            cx="120"
-            cy="120"
-            r="100"
-            stroke="#3b82f6"
-            strokeWidth="15"
-            fill="none"
-            strokeDasharray="628"
-            strokeDashoffset={(628 * (100 - percent)) / 100}
-            className="transition-all duration-500"
-          />
-        </svg>
-
-        <div className="absolute inset-0 flex items-center justify-center text-5xl font-bold">
-          {format(seconds)}
+          <button
+            onClick={() => switchMode(mode)}
+            className="px-8 py-3 bg-red-500 text-white rounded-xl shadow-lg hover:scale-105 transition"
+          >
+            Reset
+          </button>
         </div>
       </div>
-
-      {/* Controls */}
-      <div className="flex justify-center gap-4">
-        <button
-          onClick={() => setRunning((r) => !r)}
-          className="px-8 py-3 bg-green-500 text-white rounded-xl shadow-lg hover:scale-105 transition"
-        >
-          {running ? "Pause" : "Start"}
-        </button>
-
-        <button
-          onClick={() => switchMode(mode)}
-          className="px-8 py-3 bg-red-500 text-white rounded-xl shadow-lg hover:scale-105 transition"
-        >
-          Reset
-        </button>
-      </div>
-    </div>
+    </main>
   );
 }

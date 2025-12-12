@@ -1,11 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function FixedScreenCarousel() {
-  const router = useRouter();
+export default function FixedScreenCarousel({ activeApp, setActiveApp, apps }) {
   const [dashboardOn, setDashboardOn] = useState(false);
 
   const features = [
@@ -34,7 +32,9 @@ export default function FixedScreenCarousel() {
     { title: "⚙️ Settings", text: "Customize your planner.", app: "settings" },
   ];
 
-  // Reusable marquee
+  // -------------------------
+  // 🔥 FIXED MARQUEE COMPONENT
+  // -------------------------
   function Marquee({ speed, reverse, reverseOrder }) {
     const base = reverseOrder ? [...features].reverse() : features;
     const items = [...base, ...base];
@@ -43,16 +43,12 @@ export default function FixedScreenCarousel() {
       <motion.div
         className="flex gap-6 py-4"
         animate={{ x: reverse ? ["-100%", "0%"] : ["0%", "-100%"] }}
-        transition={{
-          duration: speed,
-          ease: "linear",
-          repeat: Infinity,
-        }}
+        transition={{ duration: speed, ease: "linear", repeat: Infinity }}
       >
         {items.map((f, i) => (
           <button
             key={i}
-            onClick={() => router.push(`/${f.app}`)}
+            onClick={() => setActiveApp(f.app)} // 🔥 updates parent state
             className="w-[240px] md:w-[260px] bg-[#111827] border border-gray-800 
                        rounded-2xl p-5 shadow-lg hover:shadow-xl hover:scale-105 
                        transition-all duration-200 cursor-pointer text-left"
@@ -65,14 +61,18 @@ export default function FixedScreenCarousel() {
     );
   }
 
-  // Desktop mode: use features icons
+  // -------------------------
+  // 🔥 DESKTOP GRID
+  // -------------------------
   const renderDesktop = () => (
     <div className="grid grid-cols-4 gap-6 p-8">
       {features.map((app, i) => (
         <button
           key={i}
-          onClick={() => router.push(`/${app.app}`)}
-          className="flex flex-col items-center justify-center w-24 h-24 bg-gray-800/70 dark:bg-gray-700 border border-gray-600 rounded-lg hover:scale-110 transition-all"
+          onClick={() => setActiveApp(app.app)} // 🔥 switches correctly
+          className="flex flex-col items-center justify-center w-24 h-24 bg-gray-800/70
+                     dark:bg-gray-700 border border-gray-600 rounded-lg hover:scale-110
+                     transition-all"
         >
           <span className="text-4xl">{app.title.split(" ")[0]}</span>
           <span className="text-sm mt-2">
@@ -95,10 +95,10 @@ export default function FixedScreenCarousel() {
         shadow-[0_0_40px_rgba(0,0,0,0.6)]
         overflow-hidden
         flex flex-col justify-start
-        z-50
+        z-50 
       "
+    
     >
-      {/* Toggle Button */}
       <div className="pr-5 pt-5 flex justify-end">
         <button
           onClick={() => setDashboardOn(!dashboardOn)}
@@ -108,7 +108,6 @@ export default function FixedScreenCarousel() {
         </button>
       </div>
 
-      {/* Main content */}
       {dashboardOn ? (
         <div className="flex-1 overflow-auto p-6">
           <h1 className="text-2xl font-bold text-white mb-4">
