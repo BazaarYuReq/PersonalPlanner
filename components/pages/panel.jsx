@@ -13,6 +13,9 @@ export default function AppLauncher({ setActiveApp }) {
     { label: "Earth 3D", key: "earth", emoji: "🌍" },
     { label: "Solar System", key: "system", emoji: "☀️" },
     { label: "War-game", key: "war", emoji: "🌍" },
+    { label: "Calculator", key: "calculator", emoji: "✖️" },
+    { label: "Settings", key: "settings", emoji: "⚙️" },
+    { label: "Googels", key: "googels", emoji: "𝜥" },
   ];
 
   const [lastClick, setLastClick] = useState(null);
@@ -21,20 +24,20 @@ export default function AppLauncher({ setActiveApp }) {
   const handleDoubleClick = (key) => {
     const now = Date.now();
     if (lastClick && now - lastClick.time < 300 && lastClick.key === key) {
-      // Double click detected
       setActiveApp(key);
     } else {
       setLastClick({ key, time: now });
     }
   };
 
+  const columns = 5; // <-- number of columns
+  const gap = 180; // distance between buttons
+
   return (
     <div className="w-full h-full relative p-10 text-white">
       {apps.map((app, index) => {
-        // Calculate neat grid positions
-        const row = Math.floor(index / 3);
-        const col = index % 3;
-        const gap = 200;
+        const row = Math.floor(index / columns);
+        const col = index % columns;
 
         return (
           <motion.button
@@ -44,9 +47,9 @@ export default function AppLauncher({ setActiveApp }) {
             dragConstraints={{ top: 0, left: 0, right: 1200, bottom: 600 }}
             className="
               absolute flex flex-col items-center justify-center
-             hover:bg-blue-900 transition-all
-              rounded-xl shadow-lg cursor-grab active:cursor-
-              p-6 font-semibold text-white text-lg w-[110px] h-[110px]
+              hover:bg-blue-900/50 transition-all
+              rounded-xl shadow-lg cursor-pointer
+              p-6 font-semibold text-white text-sm w-[110px] h-[110px]
               select-none
             "
             style={{

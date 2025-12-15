@@ -1,7 +1,10 @@
 import CalendarHeatmap from "@/components/ui/calendarheatmap";
 import Link from "next/link";
 export default function Profile() {
-  const data = [{ name: "Bilegdemberel", number: 9926755 }];
+  const data = [
+    { name: "Bilegdemberel", number: 9926755 },
+    { name: "Khongorzul" },
+  ];
 
   return (
     <main className="max-w-full min-h-full">

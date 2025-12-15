@@ -61,9 +61,8 @@ export default function DashboardPage() {
 
   return (
     <main>
-      {" "}
       <ReturnButton />
-      <div className="dark:text-white flex flex-col items-center justify-center w-[62vw] p-6">
+      <div className="dark:text-white flex flex-col items-center justify-center w-[40vw] p-6">
         <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
 
         {/* Progress Bar */}
