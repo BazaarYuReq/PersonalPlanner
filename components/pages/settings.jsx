@@ -6,7 +6,7 @@ import ReturnButton from "@/components/ui/returnbutton";
 
 const moods = ["💖", "😊", "😐", "😞", "😭"];
 
-export default function ProfileSettingsPage() {
+export default function ProfileSettingsPage({ setActiveApp }) {
   const [name, setName] = useState("");
   const [mood, setMood] = useState("");
   const [recommendation, setRecommendation] = useState("");
@@ -82,7 +82,7 @@ export default function ProfileSettingsPage() {
 
   return (
     <main>
-      {/* HEADER */} <ReturnButton />
+      {/* HEADER */} <ReturnButton setActiveApp={setActiveApp} />
       <div className="max-w-4xl mx-auto p-6 space-y-10 text-gray-900 dark:text-white h-screen overflow-y-scroll">
         <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-pink-400 to-purple-400 text-transparent bg-clip-text">
           Profile & Settings

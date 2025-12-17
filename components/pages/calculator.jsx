@@ -2,7 +2,7 @@
 import { useState } from "react";
 import ReturnButton from "../ui/returnbutton";
 
-export default function Calculator() {
+export default function Calculator({ setActiveApp }) {
   const [display, setDisplay] = useState("");
 
   const handleClick = (value) => {
@@ -26,7 +26,7 @@ export default function Calculator() {
 
   return (
     <main>
-      <ReturnButton />
+      <ReturnButton setActiveApp={setActiveApp} />
       <div className="w-[945px] bg-black p-9 rounded-2xl text-white items-center justify-center ">
         {/* Display */}
         <div className="bg-zinc-900 rounded-xl p-4 mb-4 text-right text-2xl min-h-[56px]">

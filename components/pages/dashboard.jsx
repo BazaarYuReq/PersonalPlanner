@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import ProgressBar from "../../components/ui/progressbar";
 import ReturnButton from "@/components/ui/returnbutton";
 
-export default function DashboardPage() {
+export default function DashboardPage({ setActiveApp }) {
   const { tasks } = useTasks();
   const [mood, setMood] = useState("");
   const [newMood, setNewMood] = useState("");
@@ -61,7 +61,7 @@ export default function DashboardPage() {
 
   return (
     <main>
-      <ReturnButton />
+      <ReturnButton setActiveApp={setActiveApp} />
       <div className="dark:text-white flex flex-col items-center justify-center w-[40vw] p-6">
         <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
 

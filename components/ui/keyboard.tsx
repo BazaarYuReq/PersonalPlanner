@@ -82,7 +82,7 @@ export default function Keyboard() {
       "F10",
       "F11",
       "F12",
-      "🔒",
+      "⏻",
     ],
     [
       "`",
@@ -130,7 +130,7 @@ export default function Keyboard() {
         {rows.map((row, i) => (
           <div key={i} className="flex gap-3 justify-center mb-3">
             {row.map((k) =>
-              k === "🔒" ? (
+              k === "⏻" ? (
                 <button
                   key={k}
                   onClick={() => setLocked(!locked)}
@@ -144,7 +144,7 @@ export default function Keyboard() {
                     }
                   `}
                 >
-                  🔒
+                  ⏻
                 </button>
               ) : (
                 <KeyButton

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import ReturnButton from "@/components/ui/returnbutton";
 
-export default function FocusPage() {
+export default function FocusPage({ setActiveApp }) {
   // Timer System
   const [mode, setMode] = useState("focus");
   const [seconds, setSeconds] = useState(25 * 60);
@@ -103,7 +103,7 @@ export default function FocusPage() {
   return (
     <main>
       {" "}
-      <ReturnButton />
+      <ReturnButton setActiveApp={setActiveApp} />
       <div className="dark:text-white text-center px-6 py-10">
         {" "}
         <h1 className="text-4xl font-bold mb-8">⏱️ Focus Mode</h1>

@@ -5,7 +5,7 @@ import { useNotes } from "../../context/NotesContext";
 import { Loader2 } from "lucide-react";
 import ReturnButton from "@/components/ui/returnbutton";
 
-export default function NotesPage() {
+export default function NotesPage({ setActiveApp }) {
   const { notes, setNotes } = useNotes();
   const [saving, setSaving] = useState(false);
 
@@ -22,7 +22,7 @@ export default function NotesPage() {
 
   return (
     <main>
-      <ReturnButton />
+      <ReturnButton setActiveApp={setActiveApp} />
       <div className="w-full px-4 md:px-8 pt-6 dark:text-white">
         {/* Header */}
         <div className="flex justify-between items-center mb-4 sticky top-0 bg-white dark:bg-gray-900 py-3 z-10">

@@ -6,7 +6,7 @@ import ReturnButton from "@/components/ui/returnbutton";
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
-export default function MoviesPage() {
+export default function MoviesPage({ setActiveApp }) {
   const [movies, setMovies] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [purchased, setPurchased] = useState([]);
@@ -67,7 +67,7 @@ export default function MoviesPage() {
 
   return (
     <main className="bg-black min-h-screen text-white">
-      <ReturnButton />
+      <ReturnButton setActiveApp={setActiveApp} />
 
       <div id="title">Popular Movies</div>
 

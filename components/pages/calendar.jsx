@@ -2,7 +2,7 @@
 import ReturnButton from "@/components/ui/returnbutton";
 import { useEffect, useState } from "react";
 
-export default function CalendarPage() {
+export default function CalendarPage({ setActiveApp }) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [tasks, setTasks] = useState([]);
 
@@ -38,7 +38,7 @@ export default function CalendarPage() {
 
   return (
     <main>
-      <ReturnButton />
+      <ReturnButton setActiveApp={setActiveApp} />
       <div className="dark:text-white flex flex-col translate-x-[125px] py-10 w-[700px] h-[300px]">
         {" "}
         {/* Month Navigation */}
