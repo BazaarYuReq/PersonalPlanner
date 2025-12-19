@@ -20,7 +20,6 @@ export default function AppLauncher({ setActiveApp }) {
 
   const [lastClick, setLastClick] = useState(null);
 
-  // Handle double-click
   const handleDoubleClick = (key) => {
     const now = Date.now();
     if (lastClick && now - lastClick.time < 300 && lastClick.key === key) {
@@ -30,11 +29,23 @@ export default function AppLauncher({ setActiveApp }) {
     }
   };
 
-  const columns = 5; // <-- number of columns
-  const gap = 180; // distance between buttons
+  const columns = 5;
+  const gap = 180;
 
   return (
-    <div className="w-full h-full relative p-10 text-white">
+    <div
+      className="w-full h-full relative p-10 text-white overflow-hidden"
+      style={{
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {/* Optional dark overlay for readability */}
+      <div className="absolute inset-0 bg-black/40 " />
+
       {apps.map((app, index) => {
         const row = Math.floor(index / columns);
         const col = index % columns;
@@ -47,10 +58,10 @@ export default function AppLauncher({ setActiveApp }) {
             dragConstraints={{ top: 0, left: 0, right: 1200, bottom: 600 }}
             className="
               absolute flex flex-col items-center justify-center
-              hover:bg-blue-900/50 transition-all
-              rounded-xl shadow-lg cursor-pointer
-              p-6 font-semibold text-white text-sm w-[110px] h-[110px]
-              select-none
+              hover:bg-blue-900/20 transition-all
+              rounded-xl cursor-pointer
+              p-6 font-semibold text-white text-sm w-[90px] h-[90px]
+              select-none z-10
             "
             style={{
               top: 50 + row * gap,

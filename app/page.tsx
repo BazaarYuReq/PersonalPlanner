@@ -49,9 +49,6 @@ export default function HomePage() {
       <SwitchTheme />
 
       {/* STATUS BAR */}
-      <div className="absolute top-6 right-6 bg-gray-900 w-[390px] h-[30px] rounded-lg flex items-center justify-center z-10">
-        <p>🔘</p>
-      </div>
 
       {/* LAPTOP CONTAINER */}
       <div className="relative flex flex-col items-center justify-center perspective-1000">
