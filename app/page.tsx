@@ -19,6 +19,7 @@ import War from "@/components/pages/war";
 import Calculator from "@/components/pages/calculator";
 import MoviesPage from "@/components/pages/googels";
 import LoginPage from "@/components/pages/login";
+import WeatherApp from "@/components/pages/weather"
 
 // 3D
 import Earth from "@/components/3d/Earth";
@@ -41,15 +42,13 @@ export default function HomePage() {
     war: <War setActiveApp={setActiveApp} />,
     calculator: <Calculator setActiveApp={setActiveApp} />,
     googels: <MoviesPage setActiveApp={setActiveApp} />,
+    weather: <WeatherApp setActiveApp={setActiveApp} />,
   };
 
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-purple-900 to-yellow-700">
       <SwitchTheme />
-      <div className="bg-gray-900 top-0 left-0 w-[390px] h-[30px] translate-x-[925px] rounded-lg translate-y-[200px] flex items-center justify-center absolute z-10">
-        <p className="p-10 translate-x-[-10px]">🔘</p>{" "}
-        ////////////////////////////////////////////////////////
-      </div>
+     
       {/* LAPTOP CONTAINER */}
       <div className="relative flex flex-col items-center justify-center perspective-1000">
         {/* SCREEN */}{" "}

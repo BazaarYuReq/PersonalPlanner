@@ -1,7 +1,7 @@
 "use client";
-import { useTasks } from "../../context/TasksContext";
+import { useTasks } from "@/context/TasksContext";
 import { useEffect, useState } from "react";
-import ProgressBar from "../../components/ui/progressbar";
+import ProgressBar from "@/components/ui/progressbar";
 import ReturnButton from "@/components/ui/returnbutton";
 
 export default function DashboardPage({ setActiveApp }) {
