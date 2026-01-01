@@ -3,7 +3,6 @@
 import { useState, createContext, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-
 // ---------- Simple Auth Context (NO components) ----------
 const AuthContext = createContext(null);
 
@@ -11,8 +10,8 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
   const login = (password) => {
-    if (password === "macos") {
-      setUser({ name: "Bilgge" });
+    if (password === "12345") {
+      setUser({ name: "Bilegdemberel" });
       return true;
     }
     return false;
@@ -35,7 +34,7 @@ export default function LoginPage({ setActiveApp }) {
   const [error, setError] = useState(false);
 
   const handleLogin = () => {
-    if (password === "macos") {
+    if (password === "12345") {
       setActiveApp("panel");
     } else {
       setError(true);
@@ -87,7 +86,9 @@ export default function LoginPage({ setActiveApp }) {
             Log In
           </button>
 
-          <p className="text-xs text-white/50">Press Enter to log in</p>
+          <p className="text-xs text-white/50">
+            Press Enter to log in with password:12345
+          </p>
         </div>
       </motion.div>
     </div>

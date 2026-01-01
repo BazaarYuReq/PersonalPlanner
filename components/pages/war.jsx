@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import ReturnButton from "@/components/ui/returnbutton";
 
-export default function War({ activeApp, setActiveApp }) {
+export default function War() {
   const [n1, setN1] = useState(500);
   const [n2, setN2] = useState(500);
   const [A1, setA1] = useState(50);
