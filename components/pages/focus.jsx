@@ -11,6 +11,12 @@ export default function FocusPage({ setActiveApp }) {
   const [running, setRunning] = useState(false);
   const intervalRef = useRef(null);
 
+  // 🔊 Sound refs
+  const startSound = useRef(null);
+  const pauseSound = useRef(null);
+  const completeSound = useRef(null);
+  const switchSound = useRef(null);
+
   // Gamification System
   const [xp, setXP] = useState(0);
   const [coins, setCoins] = useState(0);
@@ -34,7 +40,19 @@ export default function FocusPage({ setActiveApp }) {
     if (savedCoins) setCoins(parseInt(savedCoins));
     if (savedStreak) setStreak(parseInt(savedStreak));
     if (savedLast) setLastSession(savedLast);
+
+    // 🔊 Init sounds
+    startSound.current = new Audio("/sound/eero.mp3");
+    pauseSound.current = new Audio("/sounds/pause.mp3");
+    completeSound.current = new Audio("/sound/start.wav");
+    switchSound.current = new Audio("/sounds/switch.mp3");
   }, []);
+
+  function play(sound) {
+    if (!sound?.current) return;
+    sound.current.currentTime = 0;
+    sound.current.play();
+  }
 
   // Save Gamification Data
   function saveGamification(xpVal, coinVal, streakVal, dateVal) {
@@ -64,6 +82,7 @@ export default function FocusPage({ setActiveApp }) {
   }, [running]);
 
   function switchMode(m) {
+    play(switchSound);
     setMode(m);
     setSeconds(times[m]);
     setRunning(false);
@@ -72,13 +91,13 @@ export default function FocusPage({ setActiveApp }) {
 
   // Session Completion Handling
   function handleSessionComplete() {
-    const today = new Date().toLocaleDateString();
+    play(completeSound);
 
+    const today = new Date().toLocaleDateString();
     let newXP = xp + 30;
     let newCoins = coins + 10;
     let newStreak = streak;
 
-    // Streak Logic
     if (lastSession !== today) newStreak += 1;
 
     setXP(newXP);
@@ -87,8 +106,6 @@ export default function FocusPage({ setActiveApp }) {
     setLastSession(today);
 
     saveGamification(newXP, newCoins, newStreak, today);
-
-    alert(`🎉 Session Complete! +30 XP, +10 Coins, 🔥 Streak: ${newStreak}`);
   }
 
   function format(sec) {
@@ -97,34 +114,32 @@ export default function FocusPage({ setActiveApp }) {
     return `${m}:${s.toString().padStart(2, "0")}`;
   }
 
-  // Circular Timer % for ring animation
   const percent = (seconds / times[mode]) * 100;
+
+  function toggleTimer() {
+    if (running) {
+      play(pauseSound);
+    } else {
+      play(startSound);
+    }
+    setRunning((r) => !r);
+  }
 
   return (
     <main>
-      {" "}
       <ReturnButton setActiveApp={setActiveApp} />
+
       <div className="dark:text-white text-center px-6 py-10">
-        {" "}
         <h1 className="text-4xl font-bold mb-8">⏱️ Focus Mode</h1>
-        {/* XP / Coins / Streak */}
+
+        {/* Stats */}
         <div className="flex justify-center gap-6 mb-10">
-          <div className="p-4 bg-white/5 backdrop-blur-md rounded-xl border border-white/10">
-            <p className="text-lg font-semibold">⭐ XP</p>
-            <p className="text-2xl font-bold">{xp}</p>
-          </div>
-
-          <div className="p-4 bg-white/5 backdrop-blur-md rounded-xl border border-white/10">
-            <p className="text-lg font-semibold">💰 Coins</p>
-            <p className="text-2xl font-bold">{coins}</p>
-          </div>
-
-          <div className="p-4 bg-white/5 backdrop-blur-md rounded-xl border border-white/10">
-            <p className="text-lg font-semibold">🔥 Streak</p>
-            <p className="text-2xl font-bold">{streak} days</p>
-          </div>
+          <Stat title="⭐ XP" value={xp} />
+          <Stat title="💰 Coins" value={coins} />
+          <Stat title="🔥 Streak" value={`${streak} days`} />
         </div>
-        {/* Mode Switcher */}
+
+        {/* Mode Switch */}
         <div className="flex justify-center gap-4 mb-8">
           {["focus", "short", "long"].map((m) => (
             <button
@@ -144,17 +159,11 @@ export default function FocusPage({ setActiveApp }) {
             </button>
           ))}
         </div>
-        {/* Circular Timer */}
+
+        {/* Timer */}
         <div className="relative w-60 h-60 mx-auto mb-8">
           <svg className="w-full h-full -rotate-90">
-            <circle
-              cx="120"
-              cy="120"
-              r="100"
-              stroke="#333"
-              strokeWidth="15"
-              fill="none"
-            />
+            <circle cx="120" cy="120" r="100" stroke="#333" strokeWidth="15" fill="none" />
             <circle
               cx="120"
               cy="120"
@@ -167,15 +176,15 @@ export default function FocusPage({ setActiveApp }) {
               className="transition-all duration-500"
             />
           </svg>
-
           <div className="absolute inset-0 flex items-center justify-center text-5xl font-bold">
             {format(seconds)}
           </div>
         </div>
+
         {/* Controls */}
         <div className="flex justify-center gap-4">
           <button
-            onClick={() => setRunning((r) => !r)}
+            onClick={toggleTimer}
             className="px-8 py-3 bg-green-500 text-white rounded-xl shadow-lg hover:scale-105 transition"
           >
             {running ? "Pause" : "Start"}
@@ -190,5 +199,14 @@ export default function FocusPage({ setActiveApp }) {
         </div>
       </div>
     </main>
+  );
+}
+
+function Stat({ title, value }) {
+  return (
+    <div className="p-4 bg-white/5 backdrop-blur-md rounded-xl border border-white/10">
+      <p className="text-lg font-semibold">{title}</p>
+      <p className="text-2xl font-bold">{value}</p>
+    </div>
   );
 }
