@@ -44,7 +44,7 @@ const KeyButton = ({
   </div>
 );
 
-export default function Keyboard() {
+export default function Keyboard({setActiveApp}) {
   const [pressed, setPressed] = useState<Set<string>>(new Set());
   const [locked, setLocked] = useState(false);
 
@@ -131,21 +131,36 @@ export default function Keyboard() {
           <div key={i} className="flex gap-3 justify-center mb-3">
             {row.map((k) =>
               k === "⏻" ? (
-                <button
-                  key={k}
-                  onClick={() => setLocked(!locked)}
-                  className={`
-                    h-[52px] w-[70px] rounded-xl text-lg text-white
-                    transition-all duration-150
-                    ${
-                      locked
-                        ? "bg-green-500 shadow-[0_0_20px_#22c55e]"
-                        : "bg-red-700"
-                    }
-                  `}
-                >
-                  ⏻
-                </button>
+          <button
+  key={k}
+  onClick={() => {
+    setLocked(prev => {
+      const next = !prev;
+
+      // 🔌 Power logic
+      if (next) {
+        setActiveApp("off"); // or "panel" if you prefer
+      } else {
+        setActiveApp("home");
+      }
+
+      return next;
+    });
+  }}
+  className={`
+    h-[52px] w-[70px] rounded-xl text-lg text-white
+    transition-all duration-150
+    ${
+      locked
+        ? "bg-red-700"
+        : "bg-green-500 shadow-[0_0_20px_#22c55e]"
+    }
+  `}
+>
+  ⏻
+</button>
+
+
               ) : (
                 <KeyButton
                   key={k}

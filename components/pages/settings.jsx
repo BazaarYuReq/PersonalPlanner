@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import CalendarHeatmap from "@/components/ui/calendarheatmap";
 import ReturnButton from "@/components/ui/returnbutton";
+import SwitchTheme from "@/components/switch-theme";
+
 
 const moods = ["💖", "😊", "😐", "😞", "😭"];
 
@@ -138,6 +140,9 @@ export default function ProfileSettingsPage({ setActiveApp }) {
           <div className="p-4 rounded-xl bg-white/60 dark:bg-gray-800 border border-purple-200/40">
             {loading ? "✨ Generating advice..." : recommendation}
           </div>
+        </section>
+        <section>
+          <SwitchTheme/>
         </section>
 
         {/* CALENDAR HEATMAP */}

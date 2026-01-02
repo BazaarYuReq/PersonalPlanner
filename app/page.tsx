@@ -4,11 +4,12 @@ import { useState } from "react";
 import type { ReactNode } from "react";
 
 // UI
-import SwitchTheme from "@/components/ui/switch-theme";
+import SwitchTheme from "@/components/switch-theme";
 import Keyboard from "@/components/ui/keyboard";
 
 // Pages
 import Calendar from "@/components/pages/calendar";
+import Off from "@/components/pages/off";
 import DashboardPage from "@/components/pages/dashboard";
 import FocusPage from "@/components/pages/focus";
 import NotesPage from "@/components/pages/notes";
@@ -44,11 +45,11 @@ export default function HomePage() {
     calculator: <Calculator setActiveApp={setActiveApp} />,
     googels: <MoviesPage setActiveApp={setActiveApp} />,
     weather: <WeatherApp setActiveApp={setActiveApp} />,
+    off: <Off setActiveApp={setActiveApp}/>,
   };
 
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-purple-900 to-yellow-700">
-      <SwitchTheme />
 
   
       {/* LAPTOP CONTAINER */}
@@ -72,7 +73,7 @@ export default function HomePage() {
 
         {/* KEYBOARD */}
         <div className="mt-4">
-          <Keyboard />
+          <Keyboard setActiveApp={setActiveApp}/>
         </div>
       </div>
     </main>

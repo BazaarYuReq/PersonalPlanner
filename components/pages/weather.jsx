@@ -2,7 +2,7 @@
 import { useState } from "react";
 import ReturnButton from "@/components/ui/returnbutton"
 
-export default function WeatherApp() {
+export default function WeatherApp({ setActiveApp }) {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -36,7 +36,7 @@ export default function WeatherApp() {
 
   return (
   <main >
-    <ReturnButton />
+    <ReturnButton setActiveApp={setActiveApp}/>
     <div className="min-h-screen flex items-center justify-center border-2 border-black bg-blue-600">
       <div className="p-6 w-80 text-center h-[600px]">
         <h1 className="text-2xl font-bold mb-4 text-white">
