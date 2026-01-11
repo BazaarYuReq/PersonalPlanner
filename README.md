@@ -1,37 +1,22 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This project aims to help clients implement their work/tasks into many breakable steps to be productive and have it log into the Localstorage to retrieve the progress and showe it in calendar. Visualizing the long BORING tasks into fun a rinse and repeat cycle for the users to actively use it everyday and have them visit the site again. Having a dopamine hit to see ur tasks quickly finished and progress of the invisible work into a visible goal to be saved in the digital laptop the web is to ONLY focus on task setter.
 
-## Getting Started
+FREE-USER features:
+Tasks-Aims to make the users set their own tasks as a goal to finish it faster, increasing efficiency by dividing their tasks to finish the day. For example: Chemistry 20.Electochemistry/21.Transition elements/22.Benzene Into Chemistry UX/UI
 
-First, run the development server:
+Goals(IN PROGRESS)-Created by the user for their Gym/Physics/Math etc. They work to complete a goal-o-meter to 100%, Showing it as many sub-topics of days section to finish. Shows amount of sub-topics finished and not finished, very clean UI
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Dashboard-Visualise the progress in graphs(IN PROGRESS), Show the day's task sessions needs to be finished, amount of sessions done. Contains redeem goal pop-up for today's set tasks UI
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Pomodoro/Session(IN PROGRESS)-Create a timed environment to finish the set tasks for the chapter, having pomodoro like breaks to increase efficiency whilst keeping the session going. Auto fill in the bar
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Calendar-To create a deadline for the set Goal for the category and show it in calendar with color fonting for different types of tasks. It needs to show pop-ups(IN PROGRESS) when clicked or extend to show the sessions during the 24-hours table(IN PROGRESS). UI
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Profile-Upload your own profile picture to have a customizable PFP, Heatmap to see activity, EasterEggs/Goals badge of the client(IN PROGRESS), Dark-mode enabler works with daytime-checker or set freely, Description of the user, Status/Mood. UX/UI
 
-## Learn More
+PRO-USER features(5$-MONTHLY):
+AI-TOOL(IN PROGRESS?RESEARCH)-Track users progress and help motivate the user, mini-chatGPT for planning the day for the user(PROMPT NEEDED), Create automatic task setter and strategic planner for the users goals and LIST it in the dashboard. Limited to 10 GPT help
 
-To learn more about Next.js, take a look at the following resources:
+CustomLaptop-MacBook, Linux, Dell, PROMOTION-LAPTOP, CONTENTCREATORCOLLAB-LAPTOP for single-pay skins
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# PersonalHelper
