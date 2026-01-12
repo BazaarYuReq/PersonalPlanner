@@ -1,6 +1,6 @@
-#This project aims to help clients implement their work/tasks into many breakable steps to be productive and have it log into the Localstorage to retrieve the progress and showe it in calendar. Visualizing the long BORING tasks into fun a rinse and repeat cycle for the users to actively use it everyday and have them visit the site again. Having a dopamine hit to see ur tasks quickly finished and progress of the invisible work into a visible goal to be saved in the digital laptop the web is to ONLY focus on task setter.
+# This project aims to help clients implement their work/tasks into many breakable steps to be productive and have it log into the Localstorage to retrieve the progress and showe it in calendar. Visualizing the long BORING tasks into fun a rinse and repeat cycle for the users to actively use it everyday and have them visit the site again. Having a dopamine hit to see ur tasks quickly finished and progress of the invisible work into a visible goal to be saved in the digital laptop the web is to ONLY focus on task setter.
 
-#FREE-USER features:
+# FREE-USER features:
 1. Tasks-Aims to make the users set their own tasks as a goal to finish it faster, increasing efficiency by dividing their tasks to finish the day. For example: Chemistry 20.Electochemistry/21.Transition elements/22.Benzene Into Chemistry UX/UI
 
 2. Goals(IN PROGRESS)-Created by the user for their Gym/Physics/Math etc. They work to complete a goal-o-meter to 100%, Showing it as many sub-topics of days section to finish. Shows amount of sub-topics finished and not finished, very clean UI
@@ -13,17 +13,17 @@
 
 6. Profile-Upload your own profile picture to have a customizable PFP, Heatmap to see activity, EasterEggs/Goals badge of the client(IN PROGRESS), Dark-mode enabler works with daytime-checker or set freely, Description of the user, Status/Mood. UX/UI
 
-#PRO-USER features(10$-MONTHLY):
+# PRO-USER features(10$-MONTHLY):
 7. AI-TOOL(IN PROGRESS?RESEARCH)-Track users progress and help motivate the user, mini-chatGPT for planning the day for the user(PROMPT NEEDED), Create automatic task setter and strategic planner for the users goals and LIST it in the dashboard. Limited to 10 GPT help
 
-#PREMIUM-USER features(25$-MONTHLY):
+# PREMIUM-USER features(25$-MONTHLY):
 Unlimited use of AI-TOOL, SkillOP pack(INCLUDES:Set Skill IN daily skill suggestion and training in interest/query tool), Special user status, Recorded time-management tips&tricks. Custom apps for specific skill field training, speedwriting, multi-user company group for setting tasks for shared goal of the company. 
 
-#CustomLaptop(1$-Each)-MacBook, Linux, Dell, PROMOTION-LAPTOP, CONTENTCREATORCOLLAB-LAPTOP for single-pay skins
+# CustomLaptop(1$-Each)-MacBook, Linux, Dell, PROMOTION-LAPTOP, CONTENTCREATORCOLLAB-LAPTOP for single-pay skins
 
-#The project work by using setActiveApps in a screen/panel to display the components & pages with a pathway of component routing in a component display in a single home page / 
+# The project work by using setActiveApps in a screen/panel to display the components & pages with a pathway of component routing in a component display in a single home page / 
 
-#Project structure follows
+# Project structure follows
 
 PersonalPlanner/app/
 /lib
@@ -40,4 +40,17 @@ PersonalPlanner/app/
 /README.md
 /IMPORTANT_DEPENDENCIES_MODULES_MAYBE?ENV
 
+# Tech Stack
+- Next.js
+- React Context API
+- Tailwind CSS
+- LocalStorage (No Backend)
 
+# Philosophy
+This app focuses on:
+- Visibility over perfection
+- Motivation loops
+- Small daily wins
+
+# Status
+ MVP in progress

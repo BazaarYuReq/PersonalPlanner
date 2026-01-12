@@ -18,6 +18,7 @@ export default function AppLauncher({ setActiveApp }) {
     { label: "Googels", key: "googels", emoji: "𝜥" },
     { label: "Weather", key: "weather", emoji: "W" },
     { label: "Off", key: "off", emoji: "." },
+    { label: "Category", key: "category", emoji: "C" },
   ];
 
   const [lastClick, setLastClick] = useState(null);
