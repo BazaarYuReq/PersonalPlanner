@@ -129,47 +129,39 @@ export default function Keyboard({setActiveApp}) {
       <div className="relative bg-gray-900 rounded-3xl p-6 shadow-2xl">
         {rows.map((row, i) => (
           <div key={i} className="flex gap-3 justify-center mb-3">
-            {row.map((k) =>
-              k === "⏻" ? (
-          <button
-  key={k}
-  onClick={() => {
-    setLocked(prev => {
-      const next = !prev;
+            {row.map((k, index) =>
+  k === "⏻" ? (
+    <button
+      key={`power-${i}-${index}`}
+      onClick={() => {
+        setLocked(prev => {
+          const next = !prev;
+          setActiveApp(next ? "off" : "home");
+          return next;
+        });
+      }}
+      className={`
+        h-[52px] w-[70px] rounded-xl text-lg text-white
+        transition-all duration-150
+        ${
+          locked
+            ? "bg-red-700"
+            : "bg-green-500 shadow-[0_0_20px_#22c55e]"
+        }
+      `}
+    >
+      ⏻
+    </button>
+  ) : (
+    <KeyButton
+      key={`${k}-${i}-${index}`}
+      label={k}
+      active={pressed.has(k)}
+      className={keyWidth(k)}
+    />
+  )
+)}
 
-      // 🔌 Power logic
-      if (next) {
-        setActiveApp("off"); // or "panel" if you prefer
-      } else {
-        setActiveApp("home");
-      }
-
-      return next;
-    });
-  }}
-  className={`
-    h-[52px] w-[70px] rounded-xl text-lg text-white
-    transition-all duration-150
-    ${
-      locked
-        ? "bg-red-700"
-        : "bg-green-500 shadow-[0_0_20px_#22c55e]"
-    }
-  `}
->
-  ⏻
-</button>
-
-
-              ) : (
-                <KeyButton
-                  key={k}
-                  label={k}
-                  active={pressed.has(k)}
-                  className={keyWidth(k)}
-                />
-              )
-            )}
           </div>
         ))}
       </div>

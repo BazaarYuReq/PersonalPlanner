@@ -23,6 +23,7 @@ import MoviesPage from "@/components/pages/googels";
 import LoginPage from "@/components/pages/login";
 import WeatherApp from "@/components/pages/weather"
 import CategoryTaskManager from "@/components/pages/category"
+import PomodoroPage from "@/components/pages/pomodoro"
 
 // 3D
 import Earth from "@/components/3d/Earth";
@@ -47,7 +48,8 @@ export default function HomePage() {
     googels: <MoviesPage setActiveApp={setActiveApp} />,
     weather: <WeatherApp setActiveApp={setActiveApp} />,
     off: <Off setActiveApp={setActiveApp}/>,
-    category: <CategoryTaskManager setActiveApp={setActiveApp}/>
+    category: <CategoryTaskManager setActiveApp={setActiveApp}/>,
+    pomodoro: <PomodoroPage setActiveApp={setActiveApp}/>,
   };
 
   return (

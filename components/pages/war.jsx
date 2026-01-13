@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import ReturnButton from "@/components/ui/returnbutton";
 
-export default function War() {
+export default function War( {setActiveApp} ) {
   const [n1, setN1] = useState(500);
   const [n2, setN2] = useState(500);
   const [A1, setA1] = useState(50);
@@ -83,7 +83,7 @@ export default function War() {
 
   return (
     <main className="w-full h-full">
-      <ReturnButton activeApp={activeApp} setActiveApp={setActiveApp} />
+     <ReturnButton setActiveApp={setActiveApp} />
 
       {/* Top Bar */}
       <div className="w-full h-[10vh] bg-purple-600 flex items-center justify-around border-[10px] border-black">

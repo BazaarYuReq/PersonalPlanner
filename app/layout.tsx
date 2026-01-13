@@ -6,6 +6,12 @@ import SwitchTheme from "@/components/switch-theme";
 import { NotesProvider } from "../context/NotesContext";
 import { TasksProvider } from "../context/TasksContext";
 import { ThemeProviders } from "../context/ThemeContext";
+import { CategoryProvider } from "../context/CategoryContext";
+import { SessionProvider } from "../context/SessionContext";
+import { ActiveTaskProvider } from "../context/ActiveTaskContext";
+import SessionWatcher from "../context/SessionWatcher";
+
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,30 +34,38 @@ export default function RootLayout({ children }: any) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProviders>
-          <TasksProvider>
-            <NotesProvider>
-              <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-                disableTransitionOnChange
-              >
-                <header></header>
+      <ThemeProviders>
+  <SessionProvider>
+    <CategoryProvider>
+      <ActiveTaskProvider>
 
-                {/* FIXED WRAPPER */}
-                <div className="flex w-full min-h-screen">
-                  {/* <Sidebar /> */}
+        {/* 👁️ GLOBAL SESSION → TASK LINK */}
+        <SessionWatcher />
 
-                  {/* MAIN FIXES EVERYTHING */}
-                  <main className="bg-background min-w-0 flex-1 overflow-visible">
-                    {children}
-                  </main>
-                </div>
-              </ThemeProvider>
-            </NotesProvider>
-          </TasksProvider>
-        </ThemeProviders>
+        <TasksProvider>
+          <NotesProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <header></header>
+
+              <div className="flex w-full min-h-screen">
+                <main className="bg-background min-w-0 flex-1 overflow-visible">
+                  {children}
+                </main>
+              </div>
+
+            </ThemeProvider>
+          </NotesProvider>
+        </TasksProvider>
+
+      </ActiveTaskProvider>
+    </CategoryProvider>
+  </SessionProvider>
+</ThemeProviders>
       </body>
     </html>
   );
