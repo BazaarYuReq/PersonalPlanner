@@ -21,7 +21,7 @@ export default function Off() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.25 }}
         transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute bottom-6 right-6 text-green-500 text-sm"
+        className="absolute bottom-6 right-6 text-green-700 text-xl"
       >
         ●
       </motion.div>
@@ -31,7 +31,7 @@ export default function Off() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.35 }}
         transition={{ delay: 0.8 }}
-        className="absolute bottom-6 left-6 text-xs text-white/40 tracking-wide"
+        className="absolute bottom-6 left-6 text-xl text-white/40 tracking-wide"
       >
         Powered Off
       </motion.p>

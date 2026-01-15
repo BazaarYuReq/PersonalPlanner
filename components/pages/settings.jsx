@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import CalendarHeatmap from "@/components/ui/calendarheatmap";
 import ReturnButton from "@/components/ui/returnbutton";
 import SwitchTheme from "@/components/switch-theme";
 
@@ -145,11 +144,7 @@ export default function ProfileSettingsPage({ setActiveApp }) {
           <SwitchTheme/>
         </section>
 
-        {/* CALENDAR HEATMAP */}
-        <section className="bg-pink-50/80 dark:bg-pink-900/30 p-6 rounded-3xl shadow border border-pink-200/40">
-          <h2 className="text-xl font-bold mb-4">Activity Heatmap</h2>
-          <CalendarHeatmap />
-        </section>
+      
 
         {/* RESET BUTTON */}
         <div className="flex justify-center">

@@ -15,10 +15,8 @@ export default function CategoryTaskManager( {setActiveApp} ) {
 
   const activeCategory = categories.find(c => c.id === activeCategoryId);
 
-  return (
-    <div className="flex h-[70vh] gap-4 p-4 text-white">
-      <ReturnButton setActiveApp={setActiveApp} />
-      
+  return (<main>  <ReturnButton setActiveApp={setActiveApp} />
+    <div className=" h-[50vh] gap-4 p-4 text-white flex flex-row">
       {/* ================= SIDEBAR ================= */}
       <aside className="w-72 bg-zinc-900 rounded-xl p-4">
         <h2 className="text-lg font-bold mb-3">Categories</h2>
@@ -137,5 +135,6 @@ export default function CategoryTaskManager( {setActiveApp} ) {
         )}
       </main>
     </div>
+    </main>
   );
 }

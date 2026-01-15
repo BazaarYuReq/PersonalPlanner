@@ -100,7 +100,7 @@ export default function War( {setActiveApp} ) {
       </div>
 
       {/* Battleground */}
-      <div className="flex w-full h-[28vh]">
+      <div className="flex w-full h-[40vh]">
         {/* Royal Nation */}
         <div
           className="h-full cursor-pointer"

@@ -1,27 +1,35 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function AppLauncher({ setActiveApp }) {
   const apps = [
     { label: "Tasks", key: "tasks", emoji: "📝" },
     { label: "Calendar", key: "calendar", emoji: "📅" },
     { label: "Notes", key: "notes", emoji: "📚" },
-    { label: "Focus", key: "focus", emoji: "⏱️" },
     { label: "Dashboard", key: "dashboard", emoji: "📊" },
     { label: "Earth 3D", key: "earth", emoji: "🌍" },
     { label: "Solar System", key: "system", emoji: "☀️" },
-    { label: "War-game", key: "war", emoji: "🌍" },
+    { label: "War", key: "war", emoji: "🌍" },
     { label: "Calculator", key: "calculator", emoji: "✖️" },
     { label: "Settings", key: "settings", emoji: "⚙️" },
-    { label: "Googels", key: "googels", emoji: "𝜥" },
     { label: "Weather", key: "weather", emoji: "W" },
     { label: "Category", key: "category", emoji: "C" },
-    { label: "Pomodoro", key: "pomodoro", emoji: "P"}
+    { label: "Pomodoro", key: "pomodoro", emoji: "⏱️" },
   ];
 
   const [lastClick, setLastClick] = useState(null);
+  const [time, setTime] = useState(new Date());
+
+  // 🔁 Real-time clock
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleDoubleClick = (key) => {
     const now = Date.now();
@@ -35,6 +43,14 @@ export default function AppLauncher({ setActiveApp }) {
   const columns = 5;
   const gap = 180;
 
+  const hours = time.getHours().toString().padStart(2, "0");
+  const minutes = time.getMinutes().toString().padStart(2, "0");
+  const date = time.toLocaleDateString(undefined, {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  });
+
   return (
     <div
       className="w-full h-full relative p-10 text-white overflow-hidden"
@@ -46,9 +62,20 @@ export default function AppLauncher({ setActiveApp }) {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Optional dark overlay for readability */}
+      {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/40 " />
 
+      {/* 🕒 CLOCK */}
+      <div className="absolute top-6 right-8 z-20 text-right select-none translate-y-[455px] flex flex-row-reverse translate-x-[30px] gap-2">
+        <div className="text-4xl font-semibold leading-none">
+          {hours}:{minutes}
+        </div>
+        <div className="text-xs opacity-80 mt-1">
+          {date}
+        </div>
+      </div>
+
+      {/* APPS */}
       {apps.map((app, index) => {
         const row = Math.floor(index / columns);
         const col = index % columns;

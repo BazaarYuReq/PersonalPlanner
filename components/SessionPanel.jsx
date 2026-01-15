@@ -8,7 +8,7 @@ export default function SessionPanel() {
   const { activeTask } = useActiveTask();
 
   return (
-    <div className="bg-zinc-900 p-6 rounded-xl text-center">
+    <div className="bg-zinc-900 p-6 rounded-xl text-center h-[45vh]">
       <h2 className="text-2xl font-bold mb-3">Pomodoro</h2>
 
       {activeTask ? (

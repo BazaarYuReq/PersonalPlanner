@@ -22,12 +22,13 @@ export default function Calculator({ setActiveApp }) {
   const del = () => setDisplay((prev) => prev.slice(0, -1));
 
   const btn =
-    "bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-800/20 transition rounded-xl p-4 text-xl";
+    "bg-zinc-900 hover:bg-zinc-700 active:bg-zinc-800/20 transition rounded-xl p-4 text-xl";
 
   return (
-    <main>
+    <main >
       <ReturnButton setActiveApp={setActiveApp} />
-      <div className="w-[945px] bg-black p-9 rounded-2xl text-white items-center justify-center ">
+      <div className="flex items-center justify-center">
+      <div className="w-[375px] bg-black p-9 rounded-2xl text-white ">
         {/* Display */}
         <div className="bg-zinc-900 rounded-xl p-4 mb-4 text-right text-2xl min-h-[56px]">
           {display || "0"}
@@ -103,7 +104,7 @@ export default function Calculator({ setActiveApp }) {
             =
           </button>
         </div>
-      </div>
+      </div></div>
     </main>
   );
 }

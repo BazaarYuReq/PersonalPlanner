@@ -39,13 +39,13 @@ export default function CalendarPage({ setActiveApp }) {
   return (
     <main>
       <ReturnButton setActiveApp={setActiveApp} />
-      <div className="dark:text-white flex flex-col translate-x-[125px] py-10 w-[700px] h-[300px]">
+      <div className=" dark:bg-black dark:text-white bg-white flex flex-col py-2 w-[950px] h-[485px] px-5">
         {" "}
         {/* Month Navigation */}
         <div className="flex justify-between items-center mb-6 ">
           <button
             onClick={prevMonth}
-            className="px-3 py-1 bg-gray-700 dark:bg-gray-800 rounded"
+            className="px-3 py-1 bg-gray-300 dark:bg-gray-800 rounded"
           >
             ←
           </button>
@@ -59,7 +59,7 @@ export default function CalendarPage({ setActiveApp }) {
 
           <button
             onClick={nextMonth}
-            className="px-3 py-1 bg-gray-700 dark:bg-gray-800 rounded"
+            className="px-3 py-1 bg-gray-300 dark:bg-gray-800 rounded"
           >
             →
           </button>
@@ -85,21 +85,21 @@ export default function CalendarPage({ setActiveApp }) {
             return (
               <div
                 key={i}
-                className="p-2 h-24 border rounded dark:border-gray-700 flex flex-col items-start"
+                className="p-2 h-16 border rounded dark:border-gray-300 flex flex-col items-start border-black"
               >
                 <div className="font-bold">{day}</div>
 
-                <div className="overflow-y-auto w-full text-left">
+                <div className="overflow-y-auto w-full text-left flex">
                   {dayTasks.slice(0, 3).map((t) => (
                     <div
                       key={t.id}
-                      className="text-xs bg-blue-500 text-white rounded px-1 mt-1"
+                      className="text-xs text-yellow-500 bg-purple-700 rounded px-1 mt-1 x-[50px] h-[50px]"
                     >
                       {t.text}
                     </div>
                   ))}
                   {dayTasks.length > 3 && (
-                    <div className="text-xs opacity-60 mt-1">
+                    <div className="text-xs opacity-50 mt-1">
                       +{dayTasks.length - 3} more
                     </div>
                   )}

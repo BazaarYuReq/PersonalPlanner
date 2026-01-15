@@ -43,7 +43,7 @@ export default function HomePage() {
     earth: <Earth />,
     system: <SolarSystem />,
     profile: <Profile />,
-    war: <War />,
+    war: <War setActiveApp={setActiveApp}/>,
     calculator: <Calculator setActiveApp={setActiveApp} />,
     googels: <MoviesPage setActiveApp={setActiveApp} />,
     weather: <WeatherApp setActiveApp={setActiveApp} />,

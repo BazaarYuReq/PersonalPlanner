@@ -8,7 +8,7 @@ export default function PomodoroPanel() {
   const { activeTask } = useActiveTask();
 
   return (
-    <div className="border p-4">
+    <div className="border p-5">
       <h3>
         {activeTask ? `Studying: ${activeTask.taskName}` : "Select a task"}
       </h3>
